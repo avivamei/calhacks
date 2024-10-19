@@ -2,7 +2,7 @@
 *.py[cod]
 .web
 __pycache__/
+alembic.ini
+alembic/
 assets/external/
 venv/
-alembic/
-alembic.ini

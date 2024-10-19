@@ -8,7 +8,7 @@ def show_customer(user: Customer):
     """Show a customer in a table row."""
 
     return rx.table.row(
-        rx.table.cell(user.name),
+        rx.table.cell(user.company),
         rx.table.cell(user.email),
         rx.table.cell(user.phone),
         rx.table.cell(user.address),
@@ -81,13 +81,13 @@ def add_customer_button() -> rx.Component:
             rx.flex(
                 rx.form.root(
                     rx.flex(
-                        # Name
+                        # Company
                         form_field(
-                            "Name",
-                            "Customer Name",
+                            "Company",
+                            "Company Name",
                             "text",
-                            "name",
-                            "user",
+                            "company",
+                            "rocket",
                         ),
                         # Email
                         form_field(
@@ -202,14 +202,14 @@ def update_customer_dialog(user):
             rx.flex(
                 rx.form.root(
                     rx.flex(
-                        # Name
+                        # Company
                         form_field(
-                            "Name",
-                            "Customer Name",
+                            "Company",
+                            "Company Name",
                             "text",
-                            "name",
-                            "user",
-                            user.name,
+                            "company",
+                            "rocket",
+                            user.company,
                         ),
                         # Email
                         form_field(
@@ -277,7 +277,7 @@ def update_customer_dialog(user):
                         ),
                         rx.form.submit(
                             rx.dialog.close(
-                                rx.button("Update Customer"),
+                                rx.button("Update Application"),
                             ),
                             as_child=True,
                         ),
@@ -335,8 +335,8 @@ def main_table():
                 ),
             ),
             rx.select(
-                ["name", "email", "phone", "address", "payments", "date", "status"],
-                placeholder="Sort By: Name",
+                ["date","company", "email", "phone", "address", "payments", "status"],
+                placeholder="Sort By: Date",
                 size="3",
                 on_change=lambda sort_value: State.sort_values(sort_value),
             ),
@@ -359,7 +359,7 @@ def main_table():
         rx.table.root(
             rx.table.header(
                 rx.table.row(
-                    _header_cell("Name", "user"),
+                    _header_cell("Company", "rocket"),
                     _header_cell("Email", "mail"),
                     _header_cell("Phone", "phone"),
                     _header_cell("Address", "home"),
