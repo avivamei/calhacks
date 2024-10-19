@@ -19,7 +19,7 @@ def show_customer(user: Customer):
                 user.status,
                 ("Applied", status_badge("Applied")),
                 ("OA", status_badge("OA")),
-                ("Intrview", status_badge("Interview")),
+                ("Interview", status_badge("Interview")),
                 ("Offer", status_badge("Offer")),
                 ("Rejected", status_badge("Rejected")),
                 status_badge("Pending"),

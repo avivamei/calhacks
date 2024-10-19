@@ -8,7 +8,7 @@ def index() -> rx.Component:
     return rx.vstack(
         navbar(),
         # stats_cards_group(),
-        rx.image(src="/cat.jpg", height="38px"),
+        rx.image(src="/cat.svg", height="156px"),
         rx.box(
             main_table(),
             width="100%",
@@ -21,7 +21,7 @@ def index() -> rx.Component:
 
 app = rx.App(
     theme=rx.theme(
-        appearance="dark", has_background=True, radius="large", accent_color="sky"
+        appearance="dark", has_background=True, radius="large", accent_color="violet"
     ),
 )
 
