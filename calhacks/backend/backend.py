@@ -171,7 +171,7 @@ class State(rx.State):
         self.load_entries()
         return rx.toast.info(f"User {customer.name} has been deleted.", position="bottom-right")
     
-    
+     
     @rx.var(cache=True)
     def payments_change(self) -> float:
         return _get_percentage_change(self.current_month_values.total_payments, self.previous_month_values.total_payments)
