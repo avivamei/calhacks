@@ -17,9 +17,11 @@ def show_customer(user: Customer):
         rx.table.cell(
             rx.match(
                 user.status,
-                ("Delivered", status_badge("Delivered")),
-                ("Pending", status_badge("Pending")),
-                ("Cancelled", status_badge("Cancelled")),
+                ("Applied", status_badge("Applied")),
+                ("OA", status_badge("OA")),
+                ("Intrview", status_badge("Interview")),
+                ("Offer", status_badge("Offer")),
+                ("Rejected", status_badge("Rejected")),
                 status_badge("Pending"),
             )
         ),
@@ -114,7 +116,7 @@ def add_customer_button() -> rx.Component:
                                 spacing="2",
                             ),
                             rx.radio(
-                                ["Delivered", "Pending", "Cancelled"],
+                                ["Applied", "OA", "Interview", "Offer", "Rejected"],
                                 name="status",
                                 direction="row",
                                 as_child=True,
@@ -164,7 +166,7 @@ def update_customer_dialog(user):
             rx.button(
                 rx.icon("square-pen", size=22),
                 rx.text("Edit", size="3"),
-                color_scheme="blue",
+                color_scheme="iris",
                 size="2",
                 variant="solid",
                 on_click=lambda: State.get_user(user),
