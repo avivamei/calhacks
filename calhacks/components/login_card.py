@@ -6,7 +6,7 @@ def login_card() -> rx.Component:
         rx.vstack(
             rx.flex(
                 rx.image(
-                    src="/cat.jpg",
+                    src="/cat.svg",
                     width="2.5em",
                     height="auto",
                     border_radius="25%",

@@ -53,12 +53,12 @@ def show_customer(user: Customer):
     )
 
 
-def add_customer_button() -> rx.Component:
+def add_application_button() -> rx.Component:
     return rx.dialog.root(
         rx.dialog.trigger(
             rx.button(
                 rx.icon("plus", size=26),
-                rx.text("Add Customer", size="4", display=["none", "none", "block"]),
+                rx.text("Add Application", size="4", display=["none", "none", "block"]),
                 size="3",
             ),
         ),
@@ -72,12 +72,12 @@ def add_customer_button() -> rx.Component:
                 ),
                 rx.vstack(
                     rx.dialog.title(
-                        "Add New Customer",
+                        "Add New Application",
                         weight="bold",
                         margin="0",
                     ),
                     rx.dialog.description(
-                        "Fill the form with the customer's info",
+                        "Fill the form with the application's info",
                     ),
                     spacing="1",
                     height="100%",
@@ -126,7 +126,7 @@ def add_customer_button() -> rx.Component:
                         ),
                         # Address
                         form_field(
-                            "Address", "Customer Address", "text", "address", "home"
+                            "Address", "Company Address", "text", "address", "home"
                         ),
                         # Payments
                         form_field(
@@ -165,7 +165,7 @@ def add_customer_button() -> rx.Component:
                         ),
                         rx.form.submit(
                             rx.dialog.close(
-                                rx.button("Submit Customer"),
+                                rx.button("Submit Application"),
                             ),
                             as_child=True,
                         ),
@@ -211,12 +211,12 @@ def update_customer_dialog(user):
                 ),
                 rx.vstack(
                     rx.dialog.title(
-                        "Edit Customer",
+                        "Edit Application",
                         weight="bold",
                         margin="0",
                     ),
                     rx.dialog.description(
-                        "Edit the customer's info",
+                        "Edit the Application's info",
                     ),
                     spacing="1",
                     height="100%",
@@ -352,7 +352,7 @@ def _header_cell(text: str, icon: str):
 def main_table():
     return rx.fragment(
         rx.flex(
-            add_customer_button(),
+            add_application_button(),
             rx.spacer(),
             rx.cond(
                 State.sort_reverse,

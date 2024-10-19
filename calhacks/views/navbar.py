@@ -34,7 +34,7 @@ def navbar():
     return rx.flex(
         rx.badge(
             rx.icon(tag="table-2", size=28),
-            rx.heading("Customer Data App", size="6"),
+            rx.heading("Job Cat", size="6"),
             color_scheme="green",
             radius="large",
             align="center",
@@ -54,7 +54,7 @@ def navbar():
                         )
                     ),
                     rx.menu.content(
-                        rx.menu.item("Settings", on_click=DropdownMenuState2.set_which_dialog_open("settings"),),
+                        rx.menu.item("Settings", on_click=DropdownMenuState2.set_which_dialog_open("settings")),
                         rx.menu.separator(),
                         rx.menu.item("Log out", on_click=lambda: rx.redirect("/")),
                     ),
