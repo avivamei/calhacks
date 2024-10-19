@@ -1,0 +1,4 @@
+langchain-groq
+python-dotenv
+langchain-google-community\[gmail\]
+langgraph
