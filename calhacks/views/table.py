@@ -1,6 +1,7 @@
 import reflex as rx
 from ..backend.backend import State, Customer
 from ..components.form_field import form_field
+from ..components.form_field import form_field
 from ..components.status_badges import status_badge
 
 
@@ -8,8 +9,8 @@ def show_customer(user: Customer):
     """Show a customer in a table row."""
 
     return rx.table.row(
-        rx.table.cell(user.company),
-        rx.table.cell(user.email),
+        rx.table.cell(user.company, font_weight="bold"),
+        rx.table.cell(user.position),
         rx.table.cell(user.phone),
         rx.table.cell(user.address),
         rx.table.cell(f"${user.payments:,}"),
@@ -89,9 +90,13 @@ def add_customer_button() -> rx.Component:
                             "company",
                             "rocket",
                         ),
-                        # Email
+                        # Position
                         form_field(
-                            "Email", "user@reflex.dev", "email", "email", "mail"
+                            "Position", 
+                            "Job Position", 
+                            "text", 
+                            "position", 
+                            "briefcase"
                         ),
                         # Phone
                         form_field("Phone", "Customer Phone", "tel", "phone", "phone"),
@@ -211,14 +216,14 @@ def update_customer_dialog(user):
                             "rocket",
                             user.company,
                         ),
-                        # Email
+                        # Position
                         form_field(
-                            "Email",
-                            "user@reflex.dev",
-                            "email",
-                            "email",
-                            "mail",
-                            user.email,
+                            "Position",
+                            "Job Position",
+                            "text",
+                            "position",
+                            "briefcase",
+                            user.position,
                         ),
                         # Phone
                         form_field(
@@ -335,7 +340,7 @@ def main_table():
                 ),
             ),
             rx.select(
-                ["date","company", "email", "phone", "address", "payments", "status"],
+                ["date","company", "position", "phone", "address", "payments", "status"],
                 placeholder="Sort By: Date",
                 size="3",
                 on_change=lambda sort_value: State.sort_values(sort_value),
@@ -360,7 +365,7 @@ def main_table():
             rx.table.header(
                 rx.table.row(
                     _header_cell("Company", "rocket"),
-                    _header_cell("Email", "mail"),
+                    _header_cell("Position", "briefcase"),
                     _header_cell("Phone", "phone"),
                     _header_cell("Address", "home"),
                     _header_cell("Payments", "dollar-sign"),

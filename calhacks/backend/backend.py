@@ -20,7 +20,7 @@ class Customer(rx.Model, table=True):
     """The customer model."""
 
     company: str
-    email: str
+    position: str
     phone: str
     address: str
     date: str
@@ -137,10 +137,10 @@ class State(rx.State):
         self.current_user["date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         with rx.session() as session:
-            if session.exec(
-                select(Customer).where(Customer.email == self.current_user["email"])
-            ).first():
-                return rx.window_alert("User with this email already exists")
+            # if session.exec(
+            #     select(Customer).where(Customer.email == self.current_user["email"])
+            # ).first():
+            #     return rx.window_alert("User with this email already exists")
             session.add(Customer(**self.current_user))
             session.commit()
         self.load_entries()
