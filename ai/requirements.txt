@@ -1,3 +1,4 @@
 langchain-groq
 python-dotenv
-email-monitor
+langchain-google-community\[gmail\]
+langgraph
