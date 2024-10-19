@@ -37,12 +37,15 @@ search_tool = Tool(name='serper_search', func=serper_search.run, description='Us
 # search_query = query_llm.invoke('Given the following examples for search queries, formulate a search query to retrieve emails related to a new or in progress job application.\n\nThe Gmail query. Example filters include from:sender, to:recipient, subject:subject, -filtered_term, in:folder, is:important|read|starred, after:year/mo/date, before:year/mo/date, label:label_name “exact phrase”. Search newer/older than using d (day), m (month), and y (year): newer_than:2d, older_than:1y. Attachments with extension example: filename:pdf. Multiple term matching example: from:amy OR from:david.')
 # print(search_query)
 
-response = gmail_llm.invoke([BASE_SEARCH, NEW_APPLICATIONS.format(cutoff='1 year', max_results=15)])
+# response = gmail_llm.invoke([BASE_SEARCH, NEW_APPLICATIONS.format(cutoff='1 year', max_results=15)])
+response = gmail_llm.invoke('Search for emails using the following search filters:\n(\"thank you for applying\" OR \"you\'ve applied\" OR \"received your application\") newer_than:1y. Set the resource parameter ')
 print(response.tool_calls)
-emails = []
-for tc in response.tool_calls:
-    tool = list(filter(lambda x: x.name == tc['name'], gmail_tools))[0]
-    tool_out = tool.invoke(tc)
-    tool_out = json.loads(tool_out.content)
-    emails.extend(tool_out)
+tc = response.tool_calls[0]
+tool = gmail_tools[2]
+tool_out = tool.invoke(tc)
+tool_out = json.loads(tool_out.content)
+emails = tool_out
+pprint(emails)
+for email in emails:
+    if hasattr(email, 'body'): email['body'].replace('\n', '').replace('\r', '')
 print(f'Found {len(emails)} emails!')
