@@ -44,44 +44,66 @@ def sidebar() -> rx.Component:
         rx.desktop_only(
             rx.vstack(
                 rx.hstack(
-                    rx.icon_button(
-                        rx.icon("user"),
-                        size="3",
-                        radius="full",
+                    rx.image(
+                        src="/logo.jpg",
+                        width="2.25em",
+                        height="auto",
+                        border_radius="25%",
                     ),
-                    rx.vstack(
-                        rx.box(
-                            rx.text(
-                                "My account",
-                                size="3",
-                                weight="bold",
-                            ),
-                            rx.text(
-                                "user@reflex.dev",
-                                size="2",
-                                weight="medium",
-                            ),
-                            width="100%",
-                        ),
-                        spacing="0",
-                        justify="start",
-                        width="100%",
+                    rx.heading(
+                        "Reflex", size="7", weight="bold"
                     ),
-                    rx.spacer(),
-                    rx.icon_button(
-                        rx.icon("settings"),
-                        size="2",
-                        variant="ghost",
-                        color_scheme="gray",
-                    ),
-                    padding_x="0.5rem",
                     align="center",
+                    justify="start",
+                    padding_x="0.5rem",
                     width="100%",
                 ),
                 sidebar_items(),
                 rx.spacer(),
-                sidebar_item(
-                    "Help & Support", "life-buoy", "/#"
+                rx.vstack(
+                    rx.vstack(
+                        sidebar_item(
+                            "Settings", "settings", "/#"
+                        ),
+                        sidebar_item(
+                            "Log out", "log-out", "/#"
+                        ),
+                        spacing="1",
+                        width="100%",
+                    ),
+                    rx.divider(),
+                    rx.hstack(
+                        rx.icon_button(
+                            rx.icon("user"),
+                            size="3",
+                            radius="full",
+                        ),
+                        rx.vstack(
+                            rx.box(
+                                rx.text(
+                                    "My account",
+                                    size="3",
+                                    weight="bold",
+                                ),
+                                rx.text(
+                                    "user@reflex.dev",
+                                    size="2",
+                                    weight="medium",
+                                ),
+                                width="100%",
+                            ),
+                            spacing="0",
+                            align="start",
+                            justify="start",
+                            width="100%",
+                        ),
+                        padding_x="0.5rem",
+                        align="center",
+                        justify="start",
+                        width="100%",
+                    ),
+                    width="100%",
+                    spacing="5",
                 ),
                 spacing="5",
                 # position="fixed",
@@ -115,10 +137,19 @@ def sidebar() -> rx.Component:
                             sidebar_items(),
                             rx.spacer(),
                             rx.vstack(
-                                sidebar_item(
-                                    "Help & Support",
-                                    "life-buoy",
-                                    "/#",
+                                rx.vstack(
+                                    sidebar_item(
+                                        "Settings",
+                                        "settings",
+                                        "/#",
+                                    ),
+                                    sidebar_item(
+                                        "Log out",
+                                        "log-out",
+                                        "/#",
+                                    ),
+                                    width="100%",
+                                    spacing="1",
                                 ),
                                 rx.divider(margin="0"),
                                 rx.hstack(

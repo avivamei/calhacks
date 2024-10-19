@@ -1,9 +1,7 @@
-from .login import login
-from .table import main_table
-from .signup import signup
+from .landing import landing
+from .dashboard import dashboard
 
 __all__ = [
-    'login',
-    'main_table',
-    'signup'
+    'landing',
+    'dashboard',
 ]
