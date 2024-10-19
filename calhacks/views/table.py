@@ -22,7 +22,7 @@ def show_customer(user: Customer):
                 mode_badge("Unknown"),
             )
         ),
-        rx.table.cell(user.address),
+        rx.table.cell(user.location),
         rx.table.cell(f"${user.payments:,}"),
         rx.table.cell(user.date),
         rx.table.cell(
@@ -124,9 +124,9 @@ def add_customer_button() -> rx.Component:
                                 required=True,
                             ),
                         ),
-                        # Address
+                        # Location
                         form_field(
-                            "Address", "Customer Address", "text", "address", "home"
+                            "Location", "Job Location", "text", "location", "map-pin"
                         ),
                         # Payments
                         form_field(
@@ -266,14 +266,14 @@ def update_customer_dialog(user):
                                 required=True,
                             ),
                         ),
-                        # Address
+                        # Location
                         form_field(
-                            "Address",
-                            "Customer Address",
+                            "Location",
+                            "Job Location",
                             "text",
-                            "address",
-                            "home",
-                            user.address,
+                            "location",
+                            "map-pin",
+                            user.location,
                         ),
                         # Payments
                         form_field(
@@ -287,7 +287,7 @@ def update_customer_dialog(user):
                         # Status
                         rx.vstack(
                             rx.hstack(
-                                rx.icon("truck", size=16, stroke_width=1.5),
+                                rx.icon("loader", size=16, stroke_width=1.5),
                                 rx.text("Status"),
                                 align="center",
                                 spacing="2",
@@ -372,7 +372,7 @@ def main_table():
                 ),
             ),
             rx.select(
-                ["date","company", "position", "mode", "address", "payments", "status"],
+                ["date","company", "position", "mode", "location", "payments", "status"],
                 placeholder="Sort By: Date",
                 size="3",
                 on_change=lambda sort_value: State.sort_values(sort_value),
@@ -399,11 +399,11 @@ def main_table():
                     _header_cell("Company", "rocket"),
                     _header_cell("Position", "briefcase"),
                     _header_cell("Mode", "sparkles"),
-                    _header_cell("Address", "home"),
+                    _header_cell("Location", "map-pin"),
                     _header_cell("Payments", "dollar-sign"),
                     _header_cell("Date", "calendar"),
-                    _header_cell("Status", "truck"),
-                    _header_cell("Actions", "cog"),
+                    _header_cell("Status", "loader"),
+                    _header_cell("Description", "list"),
                 ),
             ),
             rx.table.body(rx.foreach(State.users, show_customer)),
