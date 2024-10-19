@@ -21,7 +21,7 @@ class Customer(rx.Model, table=True):
 
     company: str
     position: str
-    phone: str
+    mode: str
     address: str
     date: str
     payments: float

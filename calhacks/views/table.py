@@ -3,6 +3,7 @@ from ..backend.backend import State, Customer
 from ..components.form_field import form_field
 from ..components.form_field import form_field
 from ..components.status_badges import status_badge
+from ..components.mode_badges import mode_badge
 
 
 def show_customer(user: Customer):
@@ -11,7 +12,16 @@ def show_customer(user: Customer):
     return rx.table.row(
         rx.table.cell(user.company, font_weight="bold"),
         rx.table.cell(user.position),
-        rx.table.cell(user.phone),
+        rx.table.cell(
+            rx.match(
+                user.mode,
+                ("Remote", mode_badge("Remote")),
+                ("Hybrid", mode_badge("Hybrid")),
+                ("In Person", mode_badge("In Person")),
+                ("Unkown", mode_badge("Unknown")),
+                mode_badge("Unknown"),
+            )
+        ),
         rx.table.cell(user.address),
         rx.table.cell(f"${user.payments:,}"),
         rx.table.cell(user.date),
@@ -98,8 +108,22 @@ def add_customer_button() -> rx.Component:
                             "position", 
                             "briefcase"
                         ),
-                        # Phone
-                        form_field("Phone", "Customer Phone", "tel", "phone", "phone"),
+                        # Mode
+                        rx.vstack(
+                            rx.hstack(
+                                rx.icon("sparkles", size=16, stroke_width=1.5),
+                                rx.text("Work Mode"),
+                                align="center",
+                                spacing="2",
+                            ),
+                            rx.radio(
+                                ["Remote", "Hybrid", "In Person", "Unknown"],
+                                name="mode",
+                                direction="row",
+                                as_child=True,
+                                required=True,
+                            ),
+                        ),
                         # Address
                         form_field(
                             "Address", "Customer Address", "text", "address", "home"
@@ -225,14 +249,22 @@ def update_customer_dialog(user):
                             "briefcase",
                             user.position,
                         ),
-                        # Phone
-                        form_field(
-                            "Phone",
-                            "Customer Phone",
-                            "tel",
-                            "phone",
-                            "phone",
-                            user.phone,
+                        # Mode
+                        rx.vstack(
+                            rx.hstack(
+                                rx.icon("sparkles", size=16, stroke_width=1.5),
+                                rx.text("Work Mode"),
+                                align="center",
+                                spacing="2",
+                            ),
+                            rx.radio(
+                                ["Remote", "Hybrid", "In Person", "Unknown"],
+                                default_value=user.mode,
+                                name="mode",
+                                direction="row",
+                                as_child=True,
+                                required=True,
+                            ),
                         ),
                         # Address
                         form_field(
@@ -340,7 +372,7 @@ def main_table():
                 ),
             ),
             rx.select(
-                ["date","company", "position", "phone", "address", "payments", "status"],
+                ["date","company", "position", "mode", "address", "payments", "status"],
                 placeholder="Sort By: Date",
                 size="3",
                 on_change=lambda sort_value: State.sort_values(sort_value),
@@ -366,7 +398,7 @@ def main_table():
                 rx.table.row(
                     _header_cell("Company", "rocket"),
                     _header_cell("Position", "briefcase"),
-                    _header_cell("Phone", "phone"),
+                    _header_cell("Mode", "sparkles"),
                     _header_cell("Address", "home"),
                     _header_cell("Payments", "dollar-sign"),
                     _header_cell("Date", "calendar"),

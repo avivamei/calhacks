@@ -16,7 +16,7 @@ def status_badge(status: str):
     badge_mapping = {
         "Applied": ("loader", "Applied", "yellow"),
         "OA": ("star", "OA", "sky"),
-        "Interview": ("star", "Interview", "indigo"),
+        "Interview": ("sparkle", "Interview", "indigo"),
         "Offer": ("check", "Offer", "mint"),
         "Rejected": ("ban", "Rejected", "red"),
     }
