@@ -39,14 +39,17 @@ def show_customer(user: Customer):
         rx.table.cell(
             rx.hstack(
                 update_customer_dialog(user),
-                rx.icon_button(
-                    rx.icon("trash-2", size=22),
-                    on_click=lambda: State.delete_customer(getattr(user, "id")),
-                    size="2",
-                    variant="solid",
-                    color_scheme="red",
-                ),
             )
+        ),
+        rx.table.cell(
+            rx.icon_button(
+                rx.icon("x", size=16),
+                on_click=lambda: State.delete_customer(getattr(user, "id")),
+                size="1",
+                variant="outline",
+                color_scheme="red",
+                radius="full"
+            ),
         ),
         style={"_hover": {"bg": rx.color("gray", 3)}},
         align="center",
@@ -205,30 +208,28 @@ def update_customer_dialog(user):
     return rx.dialog.root(
         rx.dialog.trigger(
             rx.button(
-                rx.icon("eye", size=22),
-                rx.text("Edit", size="2"),
+                rx.icon("eye", size=16),
+                rx.text("View", size="2"),
                 color_scheme="iris",
                 size="3",
                 variant="ghost",
+                font_weight="bold",
                 on_click=lambda: State.get_user(user),
             ),
         ),
         rx.dialog.content(
             rx.hstack(
                 rx.badge(
-                    rx.icon(tag="square-pen", size=34),
+                    rx.icon(tag="list", size=34),
                     color_scheme="grass",
                     radius="full",
                     padding="0.65rem",
                 ),
                 rx.vstack(
                     rx.dialog.title(
-                        "Edit Application",
+                        "Job Description",
                         weight="bold",
                         margin="0",
-                    ),
-                    rx.dialog.description(
-                        "Edit the Application's info",
                     ),
                     spacing="1",
                     height="100%",
@@ -243,90 +244,12 @@ def update_customer_dialog(user):
             rx.flex(
                 rx.form.root(
                     rx.flex(
-                        # Company
-                        form_field(
-                            "Company",
-                            "Company Name",
-                            "text",
-                            "company",
-                            "rocket",
-                            user.company,
-                        ),
-                        # Position
-                        form_field(
-                            "Position",
-                            "Job Position",
-                            "text",
-                            "position",
-                            "briefcase",
-                            user.position,
-                        ),
-                        # Mode
-                        rx.vstack(
-                            rx.hstack(
-                                rx.icon("sparkles", size=16, stroke_width=1.5),
-                                rx.text("Work Mode"),
-                                align="center",
-                                spacing="2",
-                            ),
-                            rx.radio(
-                                ["Remote", "Hybrid", "In Person", "Unknown"],
-                                default_value=user.mode,
-                                name="mode",
-                                direction="row",
-                                as_child=True,
-                                required=True,
-                            ),
-                        ),
-                        # Location
-                        form_field(
-                            "Location",
-                            "Job Location",
-                            "text",
-                            "location",
-                            "map-pin",
-                            user.location,
-                        ),
-                        # Payments
-                        form_field(
-                            "Payment ($)",
-                            "Customer Payment",
-                            "number",
-                            "payments",
-                            "dollar-sign",
-                            user.payments.to(str),
-                        ),
-                        # Status
-                        rx.vstack(
-                            rx.hstack(
-                                rx.icon("loader", size=16, stroke_width=1.5),
-                                rx.text("Status"),
-                                align="center",
-                                spacing="2",
-                            ),
-                            rx.radio(
-                                ["Delivered", "Pending", "Cancelled"],
-                                default_value=user.status,
-                                name="status",
-                                direction="row",
-                                as_child=True,
-                                required=True,
-                            ),
-                        ),
-                        direction="column",
-                        spacing="3",
+                        rx.text(user.description)
                     ),
                     rx.flex(
-                        rx.dialog.close(
-                            rx.button(
-                                "Cancel",
-                                variant="soft",
-                                color_scheme="gray",
-                            ),
-                        ),
                         rx.form.submit(
                             rx.dialog.close(
-                                rx.button("Update Application"),
+                                rx.button("Close"),
                             ),
                             as_child=True,
                         ),
@@ -416,6 +339,7 @@ def main_table():
                     _header_cell("Date", "calendar"),
                     _header_cell("Status", "loader"),
                     _header_cell("Description", "list"),
+                    _header_cell("", "trash-2"),
                 ),
             ),
             rx.table.body(rx.foreach(State.users, show_customer)),
@@ -423,5 +347,7 @@ def main_table():
             size="3",
             width="100%",
             on_mount=State.load_entries,
+            margin_bottom="4em",
+
         ),
     )
