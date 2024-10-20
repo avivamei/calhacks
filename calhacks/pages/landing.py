@@ -1,8 +1,8 @@
+from ..templates import template
 import reflex as rx
 
-from ..views.heading import heading 
+from ..components.heading import heading 
 from ..components.login_card import login_card
-
 
 def landing() -> rx.Component:
     return rx.flex(
