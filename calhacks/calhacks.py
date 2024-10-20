@@ -12,9 +12,9 @@ def index() -> rx.Component:
     
 
 app = rx.App(
-    theme=rx.theme(
-        appearance="dark", has_background=True, radius="large", accent_color="violet"
-    ),
+    style=styles.base_style,
+    stylesheets=styles.base_stylesheets,
+
 )
 
 app.add_page(
