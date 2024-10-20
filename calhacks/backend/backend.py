@@ -22,7 +22,7 @@ class Customer(rx.Model, table=True):
     company: str
     position: str
     mode: str
-    address: str
+    location: str
     date: str
     payments: float
     status: str
