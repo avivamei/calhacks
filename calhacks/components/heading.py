@@ -3,14 +3,15 @@ import reflex as rx
 
 def heading():
     return rx.flex(
-        rx.badge(
-            rx.icon(tag="table-2", size=28),
-            rx.heading("Job Cat", size="6"),
-            color_scheme="green",
+        rx.flex(
+            rx.icon(tag="paw-print", size=50),
+            rx.heading("JobCat", size="9"),
+            # color_scheme="green",
             radius="large",
             align="center",
-            variant="surface",
+            # variant="outline",
             padding="0.65rem",
+            spacing="8px"
         ),
         rx.spacer(),
         rx.hstack(

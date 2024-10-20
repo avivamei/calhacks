@@ -12,15 +12,10 @@ from .. import styles
 from ..templates import template
 from ..views.stats_cards import stats_cards
 from ..views.charts import (
-    users_chart,
-    revenue_chart,
-    orders_chart,
-    area_toggle,
     pie_chart,
-    timeframe_select,
     StatsState,
 )
-from ..views.adquisition_view import adquisition
+from ..views.work_mode_chart import work_mode_chart
 from ..components.notification import notification
 from ..components.card import card
 from .profile import ProfileState
@@ -50,7 +45,7 @@ def tab_content_header() -> rx.Component:
     )
 
 
-@template(route="/dashboard", title="Overview", on_load=StatsState.randomize_data)
+@template(route="/dashboard", title="Overview", on_load=StatsState.calculate_application_status_counts)
 def dashboard() -> rx.Component:
     """The overview page.
 
@@ -64,48 +59,49 @@ def dashboard() -> rx.Component:
 
         ),
         rx.flex(
-            rx.text("Job Cat will help you land on your feet", size="6"),
+            rx.text("JobCat will help you land on your feet", size="6"),
+            rx.icon(tag="paw-print", size=28),
             margin_top="-28px",
+            spacing="8px"
         ),
-        stats_cards(),
-        # rx.grid(
-        #     card(
-        #         rx.hstack(
-        #             rx.hstack(
-        #                 rx.icon("user-round-search", size=20),
-        #                 rx.text("Visitors Analytics", size="4", weight="medium"),
-        #                 align="center",
-        #                 spacing="2",
-        #             ),
-        #             timeframe_select(),
-        #             align="center",
-        #             width="100%",
-        #             justify="between",
-        #         ),
-        #         pie_chart(),
-        #     ),
-        #     card(
-        #         rx.hstack(
-        #             rx.icon("globe", size=20),
-        #             rx.text("Acquisition Overview", size="4", weight="medium"),
-        #             align="center",
-        #             spacing="2",
-        #             margin_bottom="2.5em",
-        #         ),
-        #         rx.vstack(
-        #             adquisition(),
-        #         ),
-        #     ),
-        #     gap="1rem",
-        #     grid_template_columns=[
-        #         "1fr",
-        #         "repeat(1, 1fr)",
-        #         "repeat(2, 1fr)",
-        #         "repeat(2, 1fr)",
-        #         "repeat(2, 1fr)",
-        #     ],
-        #     width="100%",
-        # ),
+        # stats_cards(),
+        rx.grid(
+            card(
+                rx.hstack(
+                    rx.hstack(
+                        rx.icon("target", size=20),
+                        rx.text("Application Status", size="4", weight="medium"),
+                        align="center",
+                        spacing="2",
+                    ),
+                    align="center",
+                    width="100%",
+                    justify="between",
+                ),
+                pie_chart(),
+            ),
+            card(
+                rx.hstack(
+                    rx.icon("sparkles", size=20),
+                    rx.text("Work Mode Overview", size="4", weight="medium"),
+                    align="center",
+                    spacing="2",
+                    margin_bottom="2.5em",
+                ),
+                rx.vstack(
+                    work_mode_chart(),
+                ),
+            ),
+            gap="1rem",
+            grid_template_columns=[
+                "1fr",
+                "repeat(1, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(2, 1fr)",
+            ],
+            width="100%",
+        ),
         rx.box(
             main_table(),
             width="100%",
