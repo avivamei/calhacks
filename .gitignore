@@ -7,3 +7,5 @@ alembic/
 assets/external/
 **/venv
 **/.venv
+venv/
+ai/.venv/

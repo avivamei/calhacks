@@ -172,8 +172,9 @@ class State(rx.State):
         return rx.toast.info(f"User {customer.company} has been deleted.", position="bottom-right")
     
     def init_dashboard(self):
-        job_metadata, email_infos = get_email_data()
+        job_metadata, email_infos = get_email_data(test=True)
         for jm, ei in zip(job_metadata, email_infos):
+            print(type(jm), type(ei))
             app_dict = { **jm, **ei }
             self.add_customer_to_db(app_dict)
      
