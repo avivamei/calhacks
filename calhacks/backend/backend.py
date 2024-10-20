@@ -2,8 +2,7 @@ import reflex as rx
 from typing import Union
 from sqlmodel import select, asc, desc, or_, func, cast, String
 from datetime import datetime, timedelta
-
-
+from ai.email_parser import get_email_data
 
 def _get_percentage_change(value: Union[int, float], prev_value: Union[int, float]) -> float:
     percentage_change = (
@@ -163,7 +162,7 @@ class State(rx.State):
 
 
     def delete_customer(self, id: int):
-        """Delete a customer from the database."""
+        '''Delete a customer from the database.'''
         with rx.session() as session:
             customer = session.exec(select(Customer).where(Customer.id == id)).first()
             session.delete(customer)
@@ -171,6 +170,11 @@ class State(rx.State):
         self.load_entries()
         return rx.toast.info(f"User {customer.company} has been deleted.", position="bottom-right")
     
+    def init_dashboard(self):
+        job_metadata, email_infos = get_email_data()
+        for jm, ei in zip(job_metadata, email_infos):
+            app_dict = { **jm, **ei }
+            self.add_customer_to_db(app_dict)
      
     @rx.var(cache=True)
     def payments_change(self) -> float:

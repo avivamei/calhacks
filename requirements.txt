@@ -3,5 +3,6 @@ psycopg2-binary
 reflex_google_auth 
 langchain-groq
 python-dotenv
-langchain-google-community\[gmail\]
+langchain-google-community[gmail]
 langgraph
+beautifulsoup4

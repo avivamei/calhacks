@@ -1,5 +1,5 @@
-import reflex as rx 
-
+import reflex as rx
+from ..backend.backend import State
 
 def login_card() -> rx.Component:
     return rx.card(
@@ -43,6 +43,7 @@ def login_card() -> rx.Component:
                 width="100%",
                 ), 
             href="/dashboard"),
+            on_click=State.init_dashboard(),
             spacing="6",
             width="100%",
         ),

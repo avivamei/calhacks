@@ -1,4 +1,4 @@
 langchain-groq
 python-dotenv
-langchain-google-community\[gmail\]
+langchain-google-community[gmail]
 langgraph
