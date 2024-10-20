@@ -80,34 +80,40 @@ def stats_card(
 def stats_cards() -> rx.Component:
     return rx.grid(
         stats_card(
-            stat_name="Users",
-            value=4200,
-            prev_value=3000,
-            icon="users",
-            icon_color="blue",
+            stat_name="Applied",
+            value=150,
+            prev_value=100,
+            icon="loader",
+            icon_color="yellow",
         ),
         stats_card(
-            stat_name="Revenue",
-            value=12000,
-            prev_value=15000,
-            icon="dollar-sign",
-            icon_color="green",
-            extra_char="$",
+            stat_name="OAs or Interviews",
+            value=10,
+            prev_value=3,
+            icon="star",
+            icon_color="indigo",
         ),
         stats_card(
-            stat_name="Orders",
-            value=300,
-            prev_value=250,
-            icon="shopping-cart",
-            icon_color="purple",
+            stat_name="Offers",
+            value=2,
+            prev_value=0,
+            icon="check",
+            icon_color="mint",
+        ),
+        stats_card(
+            stat_name="Rejected",
+            value=50,
+            prev_value=20,
+            icon="ban",
+            icon_color="red",
         ),
         gap="1rem",
         grid_template_columns=[
-            "1fr",
-            "repeat(1, 1fr)",
-            "repeat(2, 1fr)",
-            "repeat(3, 1fr)",
-            "repeat(3, 1fr)",
+            "repeat(1, 1fr)",  # For small screens
+            "repeat(2, 1fr)",  # For medium screens
+            "repeat(3, 1fr)",  # For large screens
+            "repeat(4, 1fr)",  # For extra large screens (four cards)
+            "repeat(4, 1fr)",  # For larger screens, maintain 4 in a row
         ],
         width="100%",
     )

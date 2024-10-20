@@ -5,31 +5,29 @@ from .. import styles
 import reflex as rx
 
 
-def sidebar_header() -> rx.Component:
-    """Sidebar header.
-
-    Returns:
-        The sidebar header component.
-    """
-    return rx.hstack(
-        # The logo.
-        rx.color_mode_cond(
-            rx.image(src="/cat.svg", height="1.5em"),
-            rx.image(src="/cat.svg", height="1.5em"),
-        ),
-        rx.spacer(),
-        align="center",
-        width="100%",
-        padding="0.35em",
-        margin_bottom="1em",
-    )
-
-
 def sidebar_footer() -> rx.Component:
     """Sidebar footer.
 
     Returns:
         The sidebar footer component.
+    """
+    return rx.hstack(
+        # The logo.
+         rx.image(src="/cat.svg", height="16em"),
+
+        align="center",
+        justify="center",
+        width="100%",
+        # padding="0.35em",
+        margin_bottom="1em",
+    )
+
+
+def sidebar_header() -> rx.Component:
+    """Sidebar header.
+
+    Returns:
+        The sidebar header component.
     """
     return rx.hstack(
         rx.link(
