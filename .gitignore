@@ -6,3 +6,4 @@ alembic.ini
 alembic/
 assets/external/
 venv/
+ai/.venv/
