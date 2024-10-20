@@ -1,9 +1,10 @@
 import reflex as rx
 
-from . import views
+from . import pages
+from . import styles
 
-from .views.dashboard import dashboard
-from .views.landing import landing
+from .pages.dashboard import dashboard
+from .pages.landing import landing
 from .views.navbar import navbar
 
 def index() -> rx.Component:
@@ -21,12 +22,6 @@ app.add_page(
     title="Login"
 )
 
-app.add_page(
-    views.dashboard,
-    route='/dashboard',
-    title="Customer Data App",
-    description="A simple app to manage customer data."
-)
 
 
 
