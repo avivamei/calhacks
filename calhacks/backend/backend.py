@@ -26,6 +26,7 @@ class Customer(rx.Model, table=True):
     date: str
     payments: float
     status: str
+    description: str
 
 
 class MonthValues(rx.Base):

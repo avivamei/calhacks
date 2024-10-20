@@ -1,7 +1,7 @@
 import reflex as rx
 from ..backend.backend import State, Customer
 from ..components.form_field import form_field
-from ..components.form_field import form_field
+from ..components.form_text_area import form_text_area
 from ..components.status_badges import status_badge
 from ..components.mode_badges import mode_badge
 
@@ -65,8 +65,8 @@ def add_application_button() -> rx.Component:
         rx.dialog.content(
             rx.hstack(
                 rx.badge(
-                    rx.icon(tag="users", size=34),
-                    color_scheme="grass",
+                    rx.icon(tag="notebook-pen", size=34),
+                    color_scheme="sky",
                     radius="full",
                     padding="0.65rem",
                 ),
@@ -156,6 +156,14 @@ def add_application_button() -> rx.Component:
                                 required=True,
                             ),
                         ),
+                        # Description
+                        form_text_area(
+                            "Description",
+                            "Job Description",
+                            "text",
+                            "description",
+                            "list",
+                        ),
                         direction="column",
                         spacing="3",
                     ),
@@ -169,7 +177,7 @@ def add_application_button() -> rx.Component:
                         ),
                         rx.form.submit(
                             rx.dialog.close(
-                                rx.button("Submit Application"),
+                                rx.button("Save Application"),
                             ),
                             as_child=True,
                         ),
@@ -197,11 +205,11 @@ def update_customer_dialog(user):
     return rx.dialog.root(
         rx.dialog.trigger(
             rx.button(
-                rx.icon("square-pen", size=22),
-                rx.text("Edit", size="3"),
+                rx.icon("eye", size=22),
+                rx.text("Edit", size="2"),
                 color_scheme="iris",
-                size="2",
-                variant="solid",
+                size="3",
+                variant="ghost",
                 on_click=lambda: State.get_user(user),
             ),
         ),
@@ -376,7 +384,7 @@ def main_table():
                 ),
             ),
             rx.select(
-                ["date","company", "position", "mode", "location", "payments", "status"],
+                ["date","company", "position", "mode", "location", "payments", "status", "description"],
                 placeholder="Sort By: Date",
                 size="3",
                 on_change=lambda sort_value: State.sort_values(sort_value),
